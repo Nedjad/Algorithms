@@ -23,14 +23,14 @@ namespace Natural_Number
             {
                 if (number % i == 0)
                 {
-                    d++; 
-                           
+                    d++;
+                    i++;     
                 }    
                     
                 else
                     i++;
 
-                i++;   
+                
             }
 
             if (d == 0)
