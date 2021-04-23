@@ -25,12 +25,9 @@ namespace Natural_Number
                 {
                     d++;
                     i++;     
-                }    
-                    
+                }                      
                 else
-                    i++;
-
-                
+                    i++;               
             }
 
             if (d == 0)
