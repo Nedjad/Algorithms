@@ -6,22 +6,37 @@ namespace Lesson_4._2
 {
     public class Node
     {
-       
+        /// <summary>
+        /// Используется для определения стороны относительно узла
+        /// </summary>
         private enum Side
         {
             Left,
             Right
         }
-       
+        /// <summary>
+<<<<<<< HEAD
+        /// Используется в методе выводы дерева на экран и поиска
+        /// </summary>
         public class NodeInfo
         {
             public Node Node { get; set; }
+=======
+        /// Используется в методе выводы дерева на экран
+        /// </summary>
+        private class NodeInfo
+        {
+            public Node Node;
+>>>>>>> Lesson-4_branch
             public string Text;
             public int StartPos;
             public int Size { get { return Text.Length; } }
             public int EndPos { get { return StartPos + Size; } set { StartPos = value - Size; } }
             public NodeInfo Parent, Left, Right;
+<<<<<<< HEAD
             public int Depth { get; set; }
+=======
+>>>>>>> Lesson-4_branch
         }
 
         //Свойства дерева
@@ -29,10 +44,15 @@ namespace Lesson_4._2
         public Node Left { get; set; }
         public Node Right { get; set; }
         public Node Parent { get; set; }
-       
+        //Используется лишь в случает использования методов PrintMethodTwo / PrintMethodThree
         public Node RootNode { get; set; }
 
-       
+        /// <summary>
+        /// Метод вывода сбалансированного дерева (для демонстрации)
+        /// Заполняется значениями автоматически значение до 1000
+        /// </summary>
+        /// <param name="numberOfElements"></param>
+        /// <returns></returns>
         public static Node TreeAuto(int numberOfElements)
         {
             Node newNode = null;
@@ -54,7 +74,13 @@ namespace Lesson_4._2
             return newNode;
         }
 
-       
+        /// <summary>
+<<<<<<< HEAD
+        /// BFS поиск - поиск в ширину где начало поиска начинается с корня и проходит слева на право до самой правой крайней нижней точки
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public NodeInfo[] BFSsearch(Node node, int searchValue)
         {
             var bufer = new Queue<NodeInfo>();
@@ -101,7 +127,12 @@ namespace Lesson_4._2
             return returnArray.ToArray();
         }
 
-       
+        /// <summary>
+        /// DFS поиск - поиск в глубину, сначала по левой ветке, затем по правой
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public NodeInfo[] DFSsearch(Node node, int searchValue)
         {
             var bufer = new Stack<NodeInfo>();
@@ -145,7 +176,12 @@ namespace Lesson_4._2
             return returnArray.ToArray();
         }
 
-        
+        /// <summary>
+=======
+>>>>>>> Lesson-4_branch
+        /// Метод добавляет в дерево новый элемент в зависимости от значения
+        /// </summary>
+        /// <param name="value"></param>
         public void AddItem(int value)
         {
             if (Data == 0 || Data == value)
@@ -171,6 +207,12 @@ namespace Lesson_4._2
             }
         }
 
+        /// <summary>
+        /// Перегрузка метода AddItem
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="node"></param>
+        /// <param name="parent"></param>
         private void AddItem(int value, Node node, Node parent)
         {
             if (node.Data == 0 || node.Data == value)
@@ -201,7 +243,12 @@ namespace Lesson_4._2
             }
         }
 
-        
+        /// <summary>
+        /// Перегрузка метода позволяет вставлять узел в определенный узел дерева
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="node"></param>
+        /// <param name="parent"></param>
         private void AddItem(Node value, Node node, Node parent)
         {
 
@@ -231,7 +278,11 @@ namespace Lesson_4._2
             }
         }
 
-       
+        /// <summary>
+        /// Метод поиска значения в дереве
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public Node FindItem(int value)
         {
             if (Data == value)
@@ -245,7 +296,12 @@ namespace Lesson_4._2
             return FindItem(value, Right);
         }
 
-        
+        /// <summary>
+        /// Перегрузка метода FindItem
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="node"></param>
+        /// <returns></returns>
         private Node FindItem(int value, Node node)
         {
             if (node == null)
@@ -264,7 +320,10 @@ namespace Lesson_4._2
             return FindItem(value, node.Right);
         }
 
- 
+        /// <summary>
+        /// Метод удаляет узел дерева
+        /// </summary>
+        /// <param name="node"></param>
         private void RemoveNode(Node node)
         {
             if (node == null)
@@ -272,7 +331,6 @@ namespace Lesson_4._2
                 return;
             }
             var curNodeForParent = CurNodeForParent(node);
-           
             //Если у узла нет дочерних элементом, его можно удалить
             if (node.Left == null && node.Right == null)
             {
@@ -286,7 +344,6 @@ namespace Lesson_4._2
                 }
                 return;
             }
-            
             //Если нет левого дочернего узла, то правый дочерний становится на место удаляемого
             if (node.Left == null)
             {
@@ -301,7 +358,6 @@ namespace Lesson_4._2
                 node.Right.Parent = node.Parent;
                 return;
             }
-            
             //Если нет правого дочернего узла, то левый дочерний становится на место удаляемого
             if (node.Right == null)
             {
@@ -316,7 +372,6 @@ namespace Lesson_4._2
                 node.Left.Parent = node.Parent;
                 return;
             }
-           
             //Если оба дочерних узла присутствует, то правый ставится на место удаляемого, а левый вставляется в правый
             if (curNodeForParent == Side.Left)
             {
@@ -343,7 +398,10 @@ namespace Lesson_4._2
             }
         }
 
-        
+        /// <summary>
+        /// Метод удаления узла дерева через значение
+        /// </summary>
+        /// <param name="value"></param>
         public void RemoveValue(int value)
         {
             var removeNode = FindItem(value);
@@ -352,7 +410,11 @@ namespace Lesson_4._2
                 RemoveNode(removeNode);
             }
         }
-
+        /// <summary>
+        /// Метод определяет с какой стороны находится данный узел
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         private Side? CurNodeForParent(Node node)
         {
             if (node.Parent == null)
@@ -370,13 +432,21 @@ namespace Lesson_4._2
             return null;
         }
 
-      
+        /// <summary>
+        /// Метод вывода на экран структуры дерева (вариант первый)
+        /// </summary>
+        /// <param name="node"></param>
         public void PrintMethodOne(Node node)
         {
             DisplayTree(node.RootNode);
         }
 
-       
+        /// <summary>
+        /// Дочерний метод PrintMethodOne
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="indent"></param>
+        /// <param name="side"></param>
         private void DisplayTree(Node node, string indent = "", Side? side = null)
         {
             if (node != null)
@@ -391,7 +461,11 @@ namespace Lesson_4._2
             }
         }
 
-        
+        /// <summary>
+        /// Метод выводит на экран структуру дерева (вариант второй)
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="padding"></param>
         public void PrintMethodTwo(Node node, int padding)
         {
             if (node != null)
@@ -421,7 +495,17 @@ namespace Lesson_4._2
             }
         }
 
-       
+        /// <summary>
+        /// Метод вывода на экран структуры дерева. Сразу говорю, код не мой к сожалению :-(
+        /// Пришлось интегрировать его в проект, уж больно красивый :-)
+        /// Чуть переписал, чуть добавил красоты
+        /// Взято со Stackoverflow
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="textFormat"></param>
+        /// <param name="spacing"></param>
+        /// <param name="topMargin"></param>
+        /// <param name="leftMargin"></param>
         public void PrintMethodThree(Node node, string textFormat = "[ 0 ]", int spacing = 1, int topMargin = 2, int leftMargin = 2)
         {
             if (node == null)

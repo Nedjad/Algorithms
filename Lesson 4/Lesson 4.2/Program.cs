@@ -23,6 +23,8 @@ namespace Lesson_4._2
 
             myNewTree.PrintMethodThree(myNewTree);
 
+            
+
 
 
 
